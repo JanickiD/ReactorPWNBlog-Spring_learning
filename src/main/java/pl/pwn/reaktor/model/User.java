@@ -5,27 +5,36 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class User {
 	
-	@Id
+	@Id					// spring validation
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(unique=true)
+	@NotEmpty(message="{pl.reaktor.notEmpty}")  	// spring validation
+	@Email(message="{pl.reaktor.email}")			// spring validation
+	@Column(unique=true)							// spring validation
 	private String email;
 	
+	@Length(min=5, message= "{pl.reaktor.password.length}")		// spring validation
 	private String pass;
 	
+	@NotEmpty(message="{pl.reaktor.notEmpty}")		// spring validation
 	private String name;
 	
+	@NotEmpty(message="{pl.reaktor.notEmpty}")		// spring validation
 	private String lastName;
 	
 	private boolean active;
 	
-	@OneToOne
+	@ManyToOne
 	private Role role;
 
 	public long getId() {

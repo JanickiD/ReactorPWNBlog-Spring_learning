@@ -40,6 +40,11 @@ public class Role {
 		super();
 	}
 
+	public Role(String role) {
+		super();
+		this.role = role;
+	}
+
 	@Override
 	public String toString() {
 		return "Role [id=" + id + ", role=" + role + "]";
